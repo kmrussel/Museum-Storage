@@ -1,0 +1,3183 @@
+{
+	"info": {
+		"_postman_id": "30c6c5af-ff5c-414e-b572-7d2d380be622",
+		"name": "russekat_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26744843"
+	},
+	"item": [
+		{
+			"name": "create a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum_id\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"201 status code\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Louvre\",\n    \"location\": \"Paris, France\",\n    \"admission\": 17\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get museums",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get museums\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get museums text/css",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"406 status code\", function () {",
+							"    pm.response.to.have.status(406);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/css",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/museums/",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit a museum (patch)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"patch a museum\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"200 response\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Louvre Museum\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get a museum\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit a museum (put)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"put a museum\", function () {\r",
+							"    pm.response.to.have.status(303);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Louvre Museum\",\n    \"location\": \"Paris, France\",\n    \"admission\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get a museum\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a duplicate museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Louvre Museum\",\n    \"location\": \"Paris, France\",\n    \"admission\": 17\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork with invalid token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"401 response\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral\",\n    \"artist\": \"Claude\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork with missing token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"create with missing token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral\",\n    \"artist\": \"Claude\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork_id\", pm.response.json()[\"id\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral\",\n    \"artist\": \"Claude\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get artworks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork by invalid token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"edit artwork with invalid token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}} ",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}} "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork by missing token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"edit artwork with missing token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}} ",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}} "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork by another user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"edit artwork by another user\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}} ",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}} "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork (patch)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"patch an artwork\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}} ",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}} "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get edited artwork\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited artwork by another user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get edited artwork by another user\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited artwork by invalid token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get artwork with invalid token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited artwork by missing token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get artwork with missing token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork (put) by another user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral, Full Sunlight\",\n    \"artist\": \"Claude Monet\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork (put) by invalid token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"edit an artwork with invalid token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral, Full Sunlight\",\n    \"artist\": \"Claude Monet\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork (put) by missing token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"edit an artwork with missign token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral, Full Sunlight\",\n    \"artist\": \"Claude Monet\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit an artwork (put)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral, Full Sunlight\",\n    \"artist\": \"Claude Monet\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get edited artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get edited artwork\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assign an artwork to a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 response\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}",
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get museum",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get artwork",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get deleted museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get a deleted museum\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get artwork of deleted museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get artwork of deleted museum\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recreate museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create a museum\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Louvre Museum\",\n    \"location\": \"Paris, France\",\n    \"admission\": 17\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reassign an artwork to a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"reassign artwork to museum\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}",
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get artwork\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork by invalid user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork by invalid user\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork by missing token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork by missing token\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork by another user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork by another user\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get deleted artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get deleted artwork\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get museum of deleted artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get museum\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recreate artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"recreate artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Rouen Cathedral, Full Sunlight\",\n    \"artist\": \"Claude Monet\",\n    \"date\": 1894\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reassign an artwork to a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"reassign artwork to museum\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}",
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reassign an artwork to a museum again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}",
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unassign artwork from museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"unassign artwork from museum\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum_id}}/artworks/{{artwork_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}",
+						"artworks",
+						"{{artwork_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get artwork\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork_id}} ",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id}} "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a museum 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum1\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"create museum\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Getty\",\n    \"location\": \"Los Angeles, California\",\n    \"admission\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a museum 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum2\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"create museum\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Reina Sofia\",\n    \"location\": \"Madrid, Spain\",\n    \"admission\": 12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a museum 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum3\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"create museum\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"National Art Center\",\n    \"location\": \"Tokyo, Japan\",\n    \"admission\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a museum 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum4\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"create museum\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Vatican Museums\",\n    \"location\": \"Vatican City, Italy\",\n    \"admission\": 17\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a museum 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum5\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"create museum\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"San Diego Museum of Art\",\n    \"location\": \"San Diego, California\",\n    \"admission\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a museum 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"museum6\", pm.response.json()[\"id\"]);",
+							"",
+							"pm.test(\"create museum\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Shanghai Museum\",\n    \"location\": \"Shanghai, China\",\n    \"admission\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all museums",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get all museums\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork1\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Saturn Devouring His Son\",\n    \"artist\": \"Francisco Goya\",\n    \"date\": 1819\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork1\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"The Garden of Earthly Delights\",\n    \"artist\": \"Hieronymus Bosch\",\n    \"date\": 1503\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork3\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Nighthawks\",\n    \"artist\": \"Edward Hopper\",\n    \"date\": 1942\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork4\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Judith Beheading Holofernes\",\n    \"artist\": \"Caravaggio\",\n    \"date\": 1598\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork5\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Impression, Sunrise\",\n    \"artist\": \"Claude Monet\",\n    \"date\": 1872\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an artwork 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"artwork6\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"create artwork\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Untitled\",\n    \"artist\": \"Mark Rothko\",\n    \"date\": 1952\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all artworks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get all artworks\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete all",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"405 status code\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete museum\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum1}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete museum\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum2}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete museum\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete museum\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum4}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete museum\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum5}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum5}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete museum\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/museums/{{museum6}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"museums",
+						"{{museum6}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork1}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork2}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork4}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork4}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"delete artwork\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/artworks/{{artwork6}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork6}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
